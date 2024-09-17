@@ -15,6 +15,16 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        projectId: 'zzi3r1qb', // Replace with your Sanity project ID
+        dataset: 'blogs', // Replace with your dataset (e.g., 'production')
+        token: 'skL2ZLqxzKL0K83VGODdtctF80IAF34CDdvkEg52yZr30iH9iNIpimk2yjjt9TCq1xvC2L33mNGAft1J157mjKb91lnmX1Eo9jgEUKmaibPYPsyg3eu6ltPRL99BRrmPS0wVI7DbyXUkhxYuN1rF8yAQexPyvXDefWeef5agbPKlhSuiEZJa', // Optional if you need private access
+        watchMode: true, // Optional - use this in development mode
+        overlayDrafts: true, // Optional - use this if you want to see drafts
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

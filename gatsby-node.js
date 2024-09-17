@@ -7,7 +7,7 @@
 /**
  * @type {import('gatsby').GatsbyNode['createPages']}
  */
-exports.createPages = async ({ actions }) => {
+exports.createPages = async ({ graphql,actions }) => {
   const { createPage } = actions
   createPage({
     path: "/using-dsg",
@@ -15,4 +15,26 @@ exports.createPages = async ({ actions }) => {
     context: {},
     defer: true,
   })
+
+  const result = await graphql(`
+    {
+      allSanityPost {
+        nodes {
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+
+  result.data.allSanityPost.nodes.forEach(post => {
+    createPage({
+      path: `/blog/${post.slug.current}`, // Path for the blog post page
+      component: require.resolve('./src/templates/blog-post.js'),
+      context: {
+        slug: post.slug.current, // Pass the slug as context to the template
+      },
+    });
+  });
 }
