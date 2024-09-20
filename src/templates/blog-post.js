@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import styled from 'styled-components';
-
+//kdfdslkfjlksdjfklsdjflsdjflksdhfjksdhf
 // Optional: Define custom serializers
 const serializers = {
   types: {
@@ -11,6 +11,7 @@ const serializers = {
       // Check if the image has a valid URL
       if (!node.asset || !node.asset.url) return null;
 
+      
       return (
         <StyledImage 
           src={node.asset.url} 
