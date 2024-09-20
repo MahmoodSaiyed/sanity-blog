@@ -1,128 +1,89 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+// src/pages/index.js
+import React from 'react';
+import { Link } from 'gatsby';
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
-
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
-
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
-
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
-
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
-
-const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
+const IndexPage = () => {
+  return (
+    <div style={styles.container}>
+      <div style={styles.hero}>
+        <h1 style={styles.heroTitle}>Welcome to My Awesome Blog</h1>
+        <p style={styles.heroSubtitle}>Discover amazing stories, tips, and ideas</p>
+        <Link to="/blog" style={styles.heroButton}>
+          Explore the Blog
+        </Link>
+      </div>
+      <div style={styles.infoSection}>
+        <h2>Why Read My Blog?</h2>
+        <p style={styles.p}>We share insights on a wide range of topics, from tech trends to lifestyle tips. Dive in to learn more!</p>
+        <div style={styles.cards}>
+          <div style={styles.card}>
+            <h3>Tech</h3>
+            <p>Get the latest updates on technology, tutorials, and guides.</p>
+          </div>
+          <div style={styles.card}>
+            <h3>Lifestyle</h3>
+            <p>Explore articles that help improve your daily life, from productivity to wellness.</p>
+          </div>
+          <div style={styles.card}>
+            <h3>Inspiration</h3>
+            <p>Read inspiring stories to motivate and encourage you in your journey.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+  );
+};
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
+const styles = {
+  p:{
+    marginLeft:'28%'
 
-export default IndexPage
+  },
+  container: {
+    textAlign: 'center',
+    fontFamily: 'Arial, sans-serif',
+  },
+  hero: {
+    background: 'linear-gradient(to right, #6a11cb, #2575fc)',
+    color: 'white',
+    padding: '100px 20px',
+  },
+  heroTitle: {
+    fontSize: '48px',
+    margin: '0 0 20px',
+  },
+  heroSubtitle: {
+    fontSize: '24px',
+    marginBottom: '40px',
+    marginLeft:'28%'
+  },
+  heroButton: {
+    backgroundColor: '#ff6b6b',
+    color: 'white',
+    padding: '15px 30px',
+    textDecoration: 'none',
+    borderRadius: '8px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+  },
+  infoSection: {
+    padding: '50px 20px',
+    backgroundColor: '#f9f9f9',
+    
+  },
+  cards: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '20px',
+  },
+  card: {
+    backgroundColor: 'white',
+    padding: '20px',
+    margin: '10px',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    maxWidth: '200px',
+  },
+};
+
+export default IndexPage;

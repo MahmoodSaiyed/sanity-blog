@@ -14,7 +14,7 @@ export default {
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title', // Auto-generates slug from title
+        source: 'title',
         maxLength: 96,
       },
     },
@@ -23,7 +23,7 @@ export default {
       title: 'Main Image',
       type: 'image',
       options: {
-        hotspot: true,
+        hotspot: true, // Allows for image cropping
       },
     },
     {
@@ -34,7 +34,13 @@ export default {
     {
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'array',
+      of: [
+        { type: 'block' },        // Basic block types (e.g., paragraphs, headings)
+        { type: 'image' },        // Embed images
+        // Add other custom types here (e.g., custom block types or objects)
+      ],
     },
+
   ],
 };

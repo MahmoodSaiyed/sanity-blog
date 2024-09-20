@@ -27,8 +27,10 @@ const styles = {
   },
   image: {
     width: '100%',
-    height: '200px',
-    objectFit: 'cover',
+    // height: '200px',
+    objectFit: 'contain',
+    overflow: 'hidden',
+
   },
   content: {
     padding: '15px',
