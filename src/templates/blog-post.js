@@ -3,9 +3,9 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import BlockContent from '@sanity/block-content-to-react';
 import styled from 'styled-components';
-//kdfdslkfjlksdjfklsdjflsdjflksdhfjksdhf
 // Optional: Define custom serializers
 const serializers = {
+  
   types: {
     image: ({ node }) => {
       // Check if the image has a valid URL
@@ -19,10 +19,71 @@ const serializers = {
         />
       );
     },
+    table: ({ node }) => {
+      console.log(node)
+      if (!node || !node.rows) {
+        return <p>No table data available.</p>;
+      }
+      return (
+        <table style={{
+          width: '100%',
+          border: '1px solid black',
+          borderCollapse: 'collapse',
+          tableLayout: 'fixed',
+          backgroundColor: '#f9f9f9', // Table background color
+        }}>
+          <thead>
+            <tr style={{ backgroundColor: '#0867d2', color: 'white' }}> {/* Header row styling */}
+              {node.rows[0].cells.map((cell, cellIndex) => (
+                <th key={cellIndex} style={{
+                  border: '1px solid black',
+                  padding: '8px',
+                  textAlign: 'left',
+                  fontWeight: 'bold', // Make header text bold
+                }}>
+                  {cell}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {node.rows.slice(1).map((row, rowIndex) => (
+              <tr key={row._key || rowIndex} style={{
+                backgroundColor: rowIndex % 2 === 0 ? '#fafafa' : 'white' // Alternate row colors
+              }}>
+                {row.cells.map((cell, cellIndex) => (
+                  <td key={cellIndex} style={{
+                    border: '1px solid black',
+                    padding: '8px',
+                    textAlign: 'left',
+                    wordWrap: 'break-word',
+                  }}>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+      
+      
+      
+      
+    },
+
+    blockColor: ({ node }) => (
+      <h1 style={{ color: node.color }}>
+        {node.text}
+      </h1>
+    ),
   },
   marks: {
-    html: ({ children }) => {
-      return <span dangerouslySetInnerHTML={{ __html: children }} />;
+    html: ({ node }) => {
+      return <span dangerouslySetInnerHTML={{ __html: node }} />;
+    },
+    color: ({ children, mark }) => {
+      return <span style={{ color: mark.color }}>{children}</span>;
     },
   },
 };
@@ -66,6 +127,7 @@ const StyledImage = styled.img`
 
 const BlogPost = ({ data }) => {
   const post = data.sanityPost;
+  console.log(post._rawBody)
 
   return (
     <Container>

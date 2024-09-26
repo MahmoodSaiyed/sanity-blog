@@ -1,4 +1,3 @@
-// /schemas/post.js
 export default {
   name: 'post',
   title: 'Post',
@@ -36,11 +35,51 @@ export default {
       title: 'Body',
       type: 'array',
       of: [
-        { type: 'block' },        // Basic block types (e.g., paragraphs, headings)
+        {
+          type: 'block',
+          // Existing block content configuration
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 1', value: 'h1' },
+            { title: 'Heading 2', value: 'h2' },
+          ],
+          lists: [
+            { title: 'Bullet', value: 'bullet' },   // Unordered list
+            { title: 'Numbered', value: 'number' }, // Ordered list
+          ],
+          marks: {
+            decorators: [
+              { title: 'Bold', value: 'strong' },  // Bold text
+              { title: 'Italic', value: 'em' },    // Italic text
+            ],
+            annotations: [
+              {
+                name: 'color',
+                type: 'object',
+                title: 'Text Color',
+                fields: [
+                  {
+                    name: 'color',
+                    type: 'string',
+                    title: 'Color',
+                    options: {
+                      list: [
+                        { title: 'Red', value: 'red' },
+                        { title: 'Green', value: 'green' },
+                        { title: 'Blue', value: 'blue' },
+                        { title: 'Black', value: 'black' },
+                      ],
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
         { type: 'image' },        // Embed images
-        // Add other custom types here (e.g., custom block types or objects)
+        { type: 'table' },        // Add the custom table schema here
+        { type: 'blockColor' },   // Custom block color, if needed
       ],
     },
-
   ],
 };
